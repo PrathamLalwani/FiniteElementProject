@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="https://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="ring" GridType="Uniform">
+      <Topology TopologyType="Hexahedron_27" NumberOfElements="230" NodesPerElement="27">
+        <DataItem Dimensions="230 27" NumberType="Int" Format="HDF">mesh_rank_0.h5:/Mesh/ring/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XYZ">
+        <DataItem Dimensions="2398 3" Format="HDF">mesh_rank_0.h5:/Mesh/ring/geometry</DataItem>
+      </Geometry>
+    </Grid>
+    <Grid Name="ring_cells" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@Name='ring']/Geometry)" />
+      <Topology TopologyType="Hexahedron_27" NumberOfElements="230" NodesPerElement="27">
+        <DataItem Dimensions="230 27" NumberType="Int" Format="HDF">mesh_rank_0.h5:/MeshTags/ring_cells/topology</DataItem>
+      </Topology>
+      <Attribute Name="ring_cells" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="230 1" Format="HDF">mesh_rank_0.h5:/MeshTags/ring_cells/Values</DataItem>
+      </Attribute>
+    </Grid>
+    <Grid Name="ring_facets" GridType="Uniform">
+      <xi:include xpointer="xpointer(/Xdmf/Domain/Grid[@Name='ring']/Geometry)" />
+      <Topology TopologyType="Quadrilateral_9" NumberOfElements="262" NodesPerElement="9">
+        <DataItem Dimensions="262 9" NumberType="Int" Format="HDF">mesh_rank_0.h5:/MeshTags/ring_facets/topology</DataItem>
+      </Topology>
+      <Attribute Name="ring_facets" AttributeType="Scalar" Center="Cell">
+        <DataItem Dimensions="262 1" Format="HDF">mesh_rank_0.h5:/MeshTags/ring_facets/Values</DataItem>
+      </Attribute>
+    </Grid>
+  </Domain>
+</Xdmf>
