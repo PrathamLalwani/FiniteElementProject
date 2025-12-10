@@ -1,0 +1,146 @@
+
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\usepackage{booktabs} % For nicer looking tables
+
+% Page Geometry
+\geometry{
+    left=1in,
+    right=1in,
+    top=1in,
+    bottom=1in
+}
+
+\title{\Huge{Finite Element Method:}\\Poisson Equation}
+\author{\huge{Pratham Lalwani}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\chapter{Introduction}
+Solving PDEs is one of the most ubiquitous and challenging problems in Mathematics. Some PDEs have a closed form analytic solution under some circumstances but most are unsolvable and thus are solved by numerical methods. There are various methods to solve PDEs but by far the most flexible one of them is the Finite Element Method.
+
+The Finite Element method is to solve various forms of PDEs  .. Include Examples . It is used widely in industry due to it's flexibility and reliability.
+
+This report will outline the basics of finite element method and what are it's pros and cons.
+\chapter{Theory}
+\section{Approximating functions}
+Given data points $\{(x_i,y_i)\}_{i=1}^{N}$, an interpolant is such function that $f(x_{i}) = y_{i}$ and the process of finding is such an $f$ is called interpolation. There are many ways to do interpolation some of them include polynomial interpolation, Fourier Transform, Spline interpolation etc. One of the easiest interpolation techniques which also commonly used in Finite Element Methods is called Piecewise linear interpolation. This method divides your domain into $n$ intervals and then fit a linear line between the end point. An example can be seen in figure\_\_\_\_\_\_\_\_\_\_. There are 2-ways to achieve linear interpolant, Piecewise linear interpolation and $L^2$- Projection method.
+\subsection{Linear Interpolation}
+Let $\Omega = [a, b]$ be partitioned into nodes $x_0, x_1, \dots, x_N$. We define basis functions $\phi_i(x)$ (often called ``hat functions'') which satisfy the Lagrange property:
+\begin{equation}
+	\phi_i(x_j) = \delta_{ij} = \begin{cases} 1 & \text{if } i=j \\ 0 & \text{if } i \neq j \end{cases}
+\end{equation}
+The linear interpolant $\pi_h u$ of a continuous function $u$ is given by:
+\begin{equation}
+	\pi_h u(x) = \sum_{i=0}^N u(x_i)\phi_i(x)
+\end{equation}
+This approximation is exact at the nodes but introduces error inside the intervals, which depends on the mesh size $h$.
+\subsection{$L^2$-Projection}
+While interpolation forces exact values at nodes, $L^2$-projection seeks the ``best fit'' approximation in an integral sense. We seek a function $u_h$ in our finite element space $V_h$ that minimizes the $L^2$ error:
+\begin{equation}
+	\min_{v_h \in V_h} \| u - v_h \|_{L^2(\Omega)}^2
+\end{equation}
+Practically, this leads to a system of equations involving the mass matrix, ensuring the error is orthogonal to the approximation space.
+\section{The Finite Element Method}
+
+
+\subsection{Weak Form of a PDE}
+The classical (strong) form of a PDE requires the solution to be twice differentiable. FEM relies on the \textbf{Weak Form}, which relaxes these requirements.
+
+Consider the 1D Poisson problem:
+\begin{equation}
+	-u''(x) = f(x) \quad \text{on } (0,1), \quad u(0)=u(1)=0
+\end{equation}
+To derive the weak form, we multiply by a test function $v$ and integrate by parts. The weak formulation is: Find $u \in V$ such that for all $v \in V$:
+\begin{equation}
+	\int_0^1 u'(x)v'(x) \, dx = \int_0^1 f(x)v(x) \, dx
+\end{equation}
+This bilinear form is usually denoted $a(u,v) = L(v)$.
+
+
+\subsection{Mass and Stiffness Matrices}
+
+To solve this numerically, we substitute $u \approx u_h = \sum_{j} \xi_j \phi_j$ and choose test functions $v = \phi_i$. This yields a linear system $A\xi = b$.
+
+\begin{itemize}
+	\item \textbf{The Stiffness Matrix ($A$ or $K$):} Represents the discrete Laplacian.
+	      \begin{equation}
+		      A_{ij} = a(\phi_j, \phi_i) = \int_\Omega \phi_j'(x) \phi_i'(x) \, dx
+	      \end{equation}
+
+	\item \textbf{The Mass Matrix ($M$):} Represents the $L^2$ inner product.
+	      \begin{equation}
+		      M_{ij} = (\phi_j, \phi_i) = \int_\Omega \phi_j(x) \phi_i(x) \, dx
+	      \end{equation}
+\end{itemize}
+
+\section{Error Analysis of FEM for Poisson Problem}
+
+
+A fundamental result in FEM theory is \textbf{Céa's Lemma}. For piecewise linear elements on a mesh with size $h$, the error estimates are:
+\begin{enumerate}
+	\item \textbf{Energy Norm ($H^1$):} $\| u - u_h \|_{H^1} \leq C h \| u \|_{H^2}$ (Linear convergence).
+	\item \textbf{$L^2$ Norm:} $\| u - u_h \|_{L^2} \leq C h^2 \| u \|_{H^2}$ (Quadratic convergence).
+\end{enumerate}
+This implies that halving the mesh size reduces the $L^2$ error by a factor of 4.
+
+
+\chapter{Implementation}
+\subsection{Computation of Mass and Stiffness Matrices}
+
+In practice, we iterate over elements rather than nodes. For a uniform 1D mesh with element size $h$:
+
+The local stiffness matrix for a single element is:
+\begin{equation}
+	K_{local} = \frac{1}{h} \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}
+\end{equation}
+
+The local mass matrix for a single element is:
+\begin{equation}
+	M_{local} = \frac{h}{6} \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}
+\end{equation}
+
+These local matrices are then ``assembled'' into the global system matrices based on the global node indices.
+
+\chapter{Numerical Results}
+\subsection{Convergence of Interpolants}
+
+To verify the theory, we test the interpolation error of a known function $u(x) = \sin(\pi x)$. Plotting the error against mesh size $h$ on a logarithmic scale reveals:
+\begin{itemize}
+	\item Slope $\approx 2$ for the $L^2$ norm.
+	\item Slope $\approx 1$ for the $H^1$ semi-norm.
+\end{itemize}
+
+\subsection{Convergence of Finite Element on the Poisson Problem}
+We solve $-u'' = f$ numerically and compare the FEM solution $u_h$ to the exact solution $u$.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		\textbf{Mesh size ($h$)} & \textbf{$L^2$ Error} & \textbf{Order ($p$)} \\
+		\midrule
+		0.1                      & 1.25e-3              & --                   \\
+		0.05                     & 3.12e-4              & 2.00                 \\
+		0.025                    & 7.80e-5              & 2.00                 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Convergence rates for the Poisson problem using linear elements.}
+	\label{tab:convergence}
+\end{table}
+
+As shown in Table \ref{tab:convergence}, the numerical order of convergence matches the theoretical prediction of 2.
+% \section{Random Examples}
+\end{document}

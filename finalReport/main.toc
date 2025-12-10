@@ -1,0 +1,15 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Theory}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Approximating functions}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Linear Interpolation}{3}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}$L^2$-Projection}{3}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}The Finite Element Method}{4}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Weak Form of a PDE}{4}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Mass and Stiffness Matrices}{4}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Error Analysis of FEM for Poisson Problem}{4}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Implementation}{5}{chapter.3}%
+\contentsline {subsection}{\numberline {3.0.1}Computation of Mass and Stiffness Matrices}{5}{subsection.3.0.1}%
+\contentsline {chapter}{\numberline {4}Numerical Results}{6}{chapter.4}%
+\contentsline {subsection}{\numberline {4.0.1}Convergence of Interpolants}{6}{subsection.4.0.1}%
+\contentsline {subsection}{\numberline {4.0.2}Convergence of Finite Element on the Poisson Problem}{6}{subsection.4.0.2}%
+\contentsfinish 
