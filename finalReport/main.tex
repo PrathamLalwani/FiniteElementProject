@@ -38,7 +38,7 @@ This report will outline the basics of finite element method and what are it's p
 \section{Approximating functions}
 Given data points $\{(x_i,y_i)\}_{i=1}^{N}$, an interpolant is such function that $f(x_{i}) = y_{i}$ and the process of finding is such an $f$ is called interpolation. There are many ways to do interpolation some of them include polynomial interpolation, Fourier Transform, Spline interpolation etc. One of the easiest interpolation techniques which also commonly used in Finite Element Methods is called Piecewise linear interpolation. This method divides your domain into $n$ intervals and then fit a linear line between the end point. An example can be seen in figure\_\_\_\_\_\_\_\_\_\_. There are 2-ways to achieve linear interpolant, Piecewise linear interpolation and $L^2$- Projection method.
 \subsection{Linear Interpolation}
-Let $\Omega = [a, b]$ be partitioned into nodes $x_0, x_1, \dots, x_N$. We define basis functions $\phi_i(x)$ (often called ``hat functions'') which satisfy the Lagrange property:
+Let $\Omega = [a, b]$ be partitioned into nodes $x_0, x_1, \dots, x_N$. We define basis functions $\phi_i(x)$ (often called ``hat functions'') such that:
 \begin{equation}
 	\phi_i(x_j) = \delta_{ij} = \begin{cases} 1 & \text{if } i=j \\ 0 & \text{if } i \neq j \end{cases}
 \end{equation}
