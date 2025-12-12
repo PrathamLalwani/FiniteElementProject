@@ -9,7 +9,16 @@
 \contentsline {section}{\numberline {2.3}Error Analysis of FEM for Poisson Problem}{4}{section.2.3}%
 \contentsline {chapter}{\numberline {3}Implementation}{5}{chapter.3}%
 \contentsline {subsection}{\numberline {3.0.1}Computation of Mass and Stiffness Matrices}{5}{subsection.3.0.1}%
-\contentsline {chapter}{\numberline {4}Numerical Results}{6}{chapter.4}%
-\contentsline {subsection}{\numberline {4.0.1}Convergence of Interpolants}{6}{subsection.4.0.1}%
-\contentsline {subsection}{\numberline {4.0.2}Convergence of Finite Element on the Poisson Problem}{6}{subsection.4.0.2}%
+\contentsline {subsection}{\numberline {3.0.2}Pseudocode of Finite Element for Poisson Equation}{5}{subsection.3.0.2}%
+\contentsline {subsection}{\numberline {3.0.3}Pseudocode for Adaptive Finite Element}{5}{subsection.3.0.3}%
+\contentsline {chapter}{\numberline {4}Numerical Results}{7}{chapter.4}%
+\contentsline {subsection}{\numberline {4.0.1}Convergence of Interpolants}{7}{subsection.4.0.1}%
+\contentsline {subsection}{\numberline {4.0.2}Example Problem: Poisson Equation on Different Domains}{7}{subsection.4.0.2}%
+\contentsline {subsubsection}{Unit Square}{7}{section*.2}%
+\contentsline {subsubsection}{Unit Circle}{7}{section*.3}%
+\contentsline {subsubsection}{L-Shaped Domain (Re-entrant Corner)}{7}{section*.4}%
+\contentsline {subsection}{\numberline {4.0.3}Convergence Plots}{7}{subsection.4.0.3}%
+\contentsline {subsection}{\numberline {4.0.4}Comparison with Finite Difference}{8}{subsection.4.0.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{9}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Pros and Cons of using Finite Element}{9}{section.5.1}%
 \contentsfinish 
